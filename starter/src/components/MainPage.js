@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Book from "./Book";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import BookShelf from "./BookShelf";
 
-const MainPage = ({booksCurrentlyReading,booksWantToRead, booksRead, changeShelf, findBookShelf}) => {
+const MainPage = ({booksCurrentlyReading ,booksWantToRead ,booksRead , changeShelf, findBookShelf}) => {
     // const [showSearchPage, setShowSearchpage] = useState(false);
     let navigate = useNavigate();
     return (<div className="list-books">
@@ -12,32 +13,11 @@ const MainPage = ({booksCurrentlyReading,booksWantToRead, booksRead, changeShelf
     <div className="list-books-content">
         
       <div>
-        <div className="bookshelf">
-          <h2 className="bookshelf-title">Currently Reading</h2>
-          <div className="bookshelf-books">
-            <ol className="books-grid">
-              { booksCurrentlyReading.map((b) => ( <Book key={b.id} book={b} changeShelf={changeShelf}  findBookShelf={findBookShelf}/>))}
-              
-            </ol>
-          </div>
-        </div>
-        <div className="bookshelf">
-          <h2 className="bookshelf-title">Want to Read</h2>
-          <div className="bookshelf-books">
-            <ol className="books-grid">
-            { booksWantToRead.map((b) => ( <Book key={b.id} book={b} changeShelf={changeShelf} findBookShelf={findBookShelf}/>))}
-  
-            </ol>
-          </div>
-        </div>
-        <div className="bookshelf">
-          <h2 className="bookshelf-title">Read</h2>
-          <div className="bookshelf-books">
-            <ol className="books-grid">
-            { booksRead.map((b) => ( <Book  key={b.id} book={b} changeShelf={changeShelf} findBookShelf={findBookShelf}/>))}
-            </ol>
-          </div>
-        </div>
+        
+      <BookShelf books={booksCurrentlyReading} changeShelf={changeShelf} findBookShelf={findBookShelf} title="Currently Reading" />
+          <BookShelf books={booksWantToRead} changeShelf={changeShelf} findBookShelf={findBookShelf} title="Want to Read" />
+          <BookShelf books={booksRead} changeShelf={changeShelf} findBookShelf={findBookShelf} title="Read" />
+        
       </div>
     </div>
     <div className="open-search">
